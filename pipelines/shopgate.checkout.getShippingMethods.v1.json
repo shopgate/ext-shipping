@@ -1,0 +1,87 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.checkout.getShippingMethods.v1",
+    "public": true,
+    "input": [
+      {"key": "items", "id": "10", "optional": true},
+      {"key": "shippingAddress", "id": "11", "optional": true},
+      {"key": "billingAddress", "id": "12", "optional": true},
+      {"key": "shippingMethod", "id": "13", "optional": true},
+      {"key": "paymentMethod", "id": "14", "optional": true}
+    ],
+    "output": [
+      {"key": "methods", "id": "20"}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/getShippingMethods.js",
+        "input": [],
+        "output": [
+          {"key": "methods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mocked/dhl.js",
+        "input": [
+          {"key": "methods", "id": "20"},
+          {"key": "items", "id": "10", "optional": true},
+          {"key": "shippingAddress", "id": "11", "optional": true},
+          {"key": "billingAddress", "id": "12", "optional": true},
+          {"key": "shippingMethod", "id": "13", "optional": true},
+          {"key": "paymentMethod", "id": "14", "optional": true}
+        ],
+        "output": [
+          {"key": "methods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mocked/hermes.js",
+        "input": [
+          {"key": "methods", "id": "20"},
+          {"key": "items", "id": "10", "optional": true},
+          {"key": "shippingAddress", "id": "11", "optional": true},
+          {"key": "billingAddress", "id": "12", "optional": true},
+          {"key": "shippingMethod", "id": "13", "optional": true},
+          {"key": "paymentMethod", "id": "14", "optional": true}
+        ],
+        "output": [
+          {"key": "methods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mocked/ups.js",
+        "input": [
+          {"key": "methods", "id": "20"},
+          {"key": "items", "id": "10", "optional": true},
+          {"key": "shippingAddress", "id": "11", "optional": true},
+          {"key": "billingAddress", "id": "12", "optional": true},
+          {"key": "shippingMethod", "id": "13", "optional": true},
+          {"key": "paymentMethod", "id": "14", "optional": true}
+        ],
+        "output": [
+          {"key": "methods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/preselectShippingMethod.js",
+        "input": [
+          {"key": "methods", "id": "20"}
+        ],
+        "output": [
+          {"key": "methods", "id": "20"}
+        ]
+      }
+    ]
+  }
+}
