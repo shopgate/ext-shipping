@@ -81,6 +81,15 @@
         "output": [
           {"key": "methods", "id": "20"}
         ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/rememberShippingMethod.js",
+        "input": [
+          {"key": "shippingMethod", "id": "13", "optional": true}
+        ],
+        "output": []
       }
     ]
   }
