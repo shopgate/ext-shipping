@@ -14,7 +14,7 @@ module.exports = async (context, input) => {
   }
 
   methods = methods.map(method => {
-    method.selected = !!lastShippingMethod && lastShippingMethod === method.id
+    method.selected = lastShippingMethod === method.id
     return method
   })
 
