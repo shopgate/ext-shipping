@@ -23,11 +23,11 @@ describe('preselectShippingMethod', () => {
     }
   }
 
-  it('Shipping methods should be deselected', async () => {
+  it('Shipping methods should be not selected from the start', async () => {
     const input = {
       methods: [
-        {...mockedMethod1},
-        {...mockedMethod2}
+        mockedMethod1,
+        mockedMethod2
       ]
     }
     const expectedOutput = {
@@ -47,13 +47,13 @@ describe('preselectShippingMethod', () => {
     assert.deepEqual(output, expectedOutput)
   })
 
-  it('Preselect dhl shipping method', async () => {
+  it('Preselected shipping method should be returned as selected', async () => {
     context.storage.user.get = () => 'dhl'
 
     const input = {
       methods: [
-        {...mockedMethod1},
-        {...mockedMethod2}
+        mockedMethod1,
+        mockedMethod2
       ]
     }
     const expectedOutput = {
