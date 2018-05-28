@@ -18,7 +18,7 @@ describe('preselectShippingMethod', () => {
   const context = {
     storage: {
       user: {
-        get: () => null
+        get: async () => null
       }
     }
   }
@@ -32,8 +32,8 @@ describe('preselectShippingMethod', () => {
     }
     const expectedOutput = {
       methods: [
-        {selected: false, ...mockedMethod1},
-        {selected: false, ...mockedMethod2}
+        {...mockedMethod1, selected: false},
+        {...mockedMethod2, selected: false}
       ]
     }
     let output
@@ -48,7 +48,7 @@ describe('preselectShippingMethod', () => {
   })
 
   it('Preselected shipping method should be returned as selected', async () => {
-    context.storage.user.get = () => 'dhl'
+    context.storage.user.get = async () => 'dhl'
 
     const input = {
       methods: [
@@ -58,8 +58,8 @@ describe('preselectShippingMethod', () => {
     }
     const expectedOutput = {
       methods: [
-        {selected: true, ...mockedMethod1}, // dhl is preselected
-        {selected: false, ...mockedMethod2}
+        {...mockedMethod1, selected: true}, // dhl is preselected
+        {...mockedMethod2, selected: false}
       ]
     }
     let output
