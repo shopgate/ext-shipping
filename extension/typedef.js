@@ -44,11 +44,6 @@
  */
 
 /**
- * @typedef {Object} ShippingMethods
- * @property {ShippingMethod[]} methods
- */
-
-/**
  * @typedef {Object} ShippingMethod
  * @property {string} id
  * @property {string} name
@@ -58,12 +53,22 @@
  */
 
 /**
+ * @typedef {Object} GetShippingMethodsInput
+ * @property {Checkout} checkout
+ */
+
+/**
  * @typedef {Object} ShippingMethodInput
- * @property {ShippingMethod[]} methods
- * @property {Object[]} items
- * @property {Object} shippingAddress
- * @property {string} shippingAddress.countryCode
- * @property {Object} billingAddress
- * @property {Object} shippingMethod
- * @property {Object} paymentMethod
+ * @property {Checkout} checkout
+ * @property {ShippingMethod[]} shippingMethods
+ */
+
+/**
+ * typedef {Object} Checkout
+ * @property {?Object[]} items
+ * @property {?Object} shippingAddress
+ * @property {string} shippingAddress.
+ * @property {?Object} billingAddress
+ * @property {?string} shippingMethodId
+ * @property {?string} paymentMethodId
  */
