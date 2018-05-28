@@ -1,5 +1,6 @@
 const assert = require('assert')
 const executeStep = require('../../../shipping/setShippingMethodSelection')
+const createContext = require('../../mock/createContext')
 
 describe('setShippingMethodSelection', () => {
   const mockedMethod1 = {
@@ -8,12 +9,14 @@ describe('setShippingMethodSelection', () => {
     description: 'Delivery of order before Saturday 17 May 2018',
     amount: 300
   }
+
   const mockedMethod2 = {
     id: 'ups',
     name: 'UPS',
     description: 'Delivery of order before Saturday 17 May 2018',
     amount: 500
   }
+
   const mockedMethod3 = {
     id: 'hermes',
     name: 'Hermes',
@@ -21,18 +24,9 @@ describe('setShippingMethodSelection', () => {
     amount: 500
   }
 
-  const context = {
-    storage: {
-      user: {
-        get: async () => null
-      }
-    },
-    meta: {
-      userId: 1
-    }
-  }
-
   it('Should not select anything if no data is available', async () => {
+    const context = createContext('user', () => null, () => {}, () => {}, 1)
+
     const input = {
       checkout: {},
       shippingMethods: [
@@ -40,12 +34,14 @@ describe('setShippingMethodSelection', () => {
         mockedMethod2
       ]
     }
+
     const expectedOutput = {
       shippingMethods: [
         {...mockedMethod1, selected: false},
         {...mockedMethod2, selected: false}
       ]
     }
+
     let output
     try {
       // noinspection JSCheckFunctionSignatures
@@ -58,7 +54,7 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should return last shipping method as selected, if nothing else available', async () => {
-    context.storage.user.get = async () => mockedMethod1.id
+    const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
 
     const input = {
       checkout: {},
@@ -67,12 +63,14 @@ describe('setShippingMethodSelection', () => {
         mockedMethod2
       ]
     }
+
     const expectedOutput = {
       shippingMethods: [
         {...mockedMethod1, selected: true},
         {...mockedMethod2, selected: false}
       ]
     }
+
     let output
     try {
       // noinspection JSCheckFunctionSignatures
@@ -85,7 +83,7 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should prioritize the shipping selection from frontend over the shipping from last order', async () => {
-    context.storage.user.get = async () => mockedMethod1.id
+    const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
 
     const input = {
       checkout: {
@@ -96,12 +94,14 @@ describe('setShippingMethodSelection', () => {
         mockedMethod2
       ]
     }
+
     const expectedOutput = {
       shippingMethods: [
         {...mockedMethod1, selected: false},
         {...mockedMethod2, selected: true}
       ]
     }
+
     let output
     try {
       // noinspection JSCheckFunctionSignatures
@@ -114,7 +114,7 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should not select any shipping if the selection is not available', async () => {
-    context.storage.user.get = async () => mockedMethod1.id
+    const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
 
     const input = {
       checkout: {
@@ -124,11 +124,13 @@ describe('setShippingMethodSelection', () => {
         mockedMethod3
       ]
     }
+
     const expectedOutput = {
       shippingMethods: [
         {...mockedMethod3, selected: false}
       ]
     }
+
     let output
     try {
       // noinspection JSCheckFunctionSignatures
