@@ -59,7 +59,12 @@
 
 /**
  * @typedef {Object} ShippingMethodInput
+ * @property {CheckoutInput} checkout
  * @property {ShippingMethod[]} methods
+ */
+
+/**
+ * @typedef {Object} CheckoutInput
  * @property {Object[]} items
  * @property {Object} shippingAddress
  * @property {string} shippingAddress.countryCode

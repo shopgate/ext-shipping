@@ -9,9 +9,9 @@ module.exports = async (context, input) => {
   let allow = true
 
   // Return DHL when address is in DE
-  if (input.shippingAddress && input.shippingAddress.countryCode) {
+  if (input.checkout.shippingAddress && input.checkout.shippingAddress.countryCode) {
     const allowedCountries = ['DE']
-    if (!allowedCountries.includes(input.shippingAddress.countryCode)) {
+    if (!allowedCountries.includes(input.checkout.shippingAddress.countryCode)) {
       allow = false
     }
   }
@@ -21,7 +21,7 @@ module.exports = async (context, input) => {
       id: 'hermes',
       name: 'Hermes',
       description: 'Delivery of order before Sunday 18 May 2018',
-      amount: 500
+      amount: 110
     })
   }
 
