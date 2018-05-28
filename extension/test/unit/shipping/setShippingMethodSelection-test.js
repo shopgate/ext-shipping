@@ -25,8 +25,8 @@ describe('setShippingMethodSelection', () => {
   }
 
   it('Should not select anything if no data is available', async () => {
+    // nothing was selected, so there should be no selection returned
     const context = createContext('user', () => null, () => {}, () => {}, 1)
-
     const input = {
       checkout: {},
       shippingMethods: [
@@ -54,8 +54,8 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should return last shipping method as selected, if nothing else available', async () => {
+    // no fronteend selection given, so it should take it from the last order
     const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
-
     const input = {
       checkout: {},
       shippingMethods: [
@@ -83,8 +83,8 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should prioritize the shipping selection from frontend over the shipping from last order', async () => {
+    // select 1 and 2, but 2 should be prioritized over 1
     const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
-
     const input = {
       checkout: {
         shippingMethodId: mockedMethod2.id
@@ -114,17 +114,19 @@ describe('setShippingMethodSelection', () => {
   })
 
   it('Should not select any shipping if the selection is not available', async () => {
+    // set mocked shipping methods 1 and 2 to "selected"
     const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
-
     const input = {
       checkout: {
         shippingMethodId: mockedMethod2.id
       },
+      // shipping methods 1 and 2 are not selectable
       shippingMethods: [
         mockedMethod3
       ]
     }
 
+    // mocked shipping methods 1 and 2 were selected but only not-selected method 3 is expected
     const expectedOutput = {
       shippingMethods: [
         {...mockedMethod3, selected: false}
