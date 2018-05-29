@@ -1,0 +1,108 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.checkout.getShippingMethods.v1",
+    "public": true,
+    "input": [
+      {"key": "checkout", "id": "10"}
+    ],
+    "output": [
+      {"key": "shippingMethods", "id": "20"}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/prepareShippingMethodList.js",
+        "input": [],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedMethods/dhl.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedMethods/hermes.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedMethods/ups.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedRules/DE.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedRules/NL.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedRules/UK.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/setShippingMethodSelection.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      }
+    ]
+  }
+}
