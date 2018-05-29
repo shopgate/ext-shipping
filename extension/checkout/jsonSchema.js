@@ -15,8 +15,7 @@ const checkoutSchema = Joi.object().keys({
     name: Joi.string().required()
   })
 }).requiredKeys([
-  'items',
-  'shippingMethod'
+  'items'
 ]).unknown(true) // other keys are allowed as well
 
 module.exports = {
