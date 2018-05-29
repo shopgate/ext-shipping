@@ -1,12 +1,13 @@
-const ShippingError = require('./ShippingError')
+const CheckoutError = require('./CheckoutError')
 
-class ValidationError extends ShippingError {
+class ValidationError extends CheckoutError {
   constructor (error) {
     super()
 
-    this.code = 'EINV'
+    this.code = 'EVALIDATION'
     this.message = `Validation error ${error}`
     this.error = error
+    this.validationErrors = []
   }
 }
 
