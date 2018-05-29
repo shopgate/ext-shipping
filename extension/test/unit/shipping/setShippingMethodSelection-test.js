@@ -7,21 +7,21 @@ describe('setShippingMethodSelection', () => {
     id: 'dhl',
     name: 'DHL',
     description: 'Delivery of order before Saturday 17 May 2018',
-    amount: 300
+    amount: 90
   }
 
   const mockedMethod2 = {
     id: 'ups',
     name: 'UPS',
     description: 'Delivery of order before Saturday 17 May 2018',
-    amount: 500
+    amount: 100
   }
 
   const mockedMethod3 = {
     id: 'hermes',
     name: 'Hermes',
     description: 'Delivery of order before Sunday 18 May 2018',
-    amount: 500
+    amount: 110
   }
 
   it('Should not select anything if no data is available', async () => {

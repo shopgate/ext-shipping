@@ -8,7 +8,7 @@ module.exports = async (context, input) => {
     id: 'dhl',
     name: 'DHL',
     description: 'Delivery of order before Saturday 17 May 2018',
-    amount: 300
+    amount: 90
   })
 
   return {shippingMethods: input.shippingMethods}

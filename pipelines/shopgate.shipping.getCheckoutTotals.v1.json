@@ -23,12 +23,12 @@
       },
       {
         "type": "pipeline",
-        "id": "shopgate.checkout.getShippingMethods.v1",
+        "id": "shopgate.checkout.getShippingMethod.v1",
         "input": [
           {"key": "checkout", "id": "10"}
         ],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethod", "id": "20"}
         ]
       },
       {
@@ -36,7 +36,7 @@
         "id": "@shopgate/shipping",
         "path": "@shopgate/shipping/checkout/getTotals.js",
         "input": [
-          {"key": "shippingMethods", "id": "20"},
+          {"key": "shippingMethod", "id": "20"},
           {"key": "checkout", "id": "10"},
           {"key": "totals", "id": "11"}
         ],
