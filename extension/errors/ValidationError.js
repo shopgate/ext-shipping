@@ -1,6 +1,6 @@
-const CheckoutError = require('./CheckoutError')
+const ShippingError = require('./ShippingError')
 
-class ValidationError extends CheckoutError {
+class ValidationError extends ShippingError {
   constructor (error) {
     super()
 
