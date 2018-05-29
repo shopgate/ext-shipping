@@ -1,0 +1,37 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.checkout.getShippingMethod.v1",
+    "public": true,
+    "input": [
+      {"key": "checkout", "id": "10"}
+    ],
+    "output": [
+      {"key": "shippingMethod", "id": "30", "optional": true}
+    ],
+    "steps": [
+      {
+        "type": "pipeline",
+        "id": "shopgate.checkout.getShippingMethods.v1",
+        "input": [
+          {"key": "checkout", "id": "10"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/extractShippingMethod.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethod", "id": "30", "optional": true}
+        ]
+      }
+    ]
+  }
+}
