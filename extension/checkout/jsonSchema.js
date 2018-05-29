@@ -12,7 +12,8 @@ const checkoutSchema = Joi.object().keys({
     })),
   shippingMethod: Joi.object().keys({
     id: Joi.string().required(),
-    name: Joi.string().required()
+    name: Joi.string().required(),
+    amount: Joi.number().integer()
   })
 }).requiredKeys([
   'items'
