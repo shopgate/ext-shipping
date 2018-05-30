@@ -4,9 +4,10 @@ class ValidationError extends ShippingError {
   constructor (error) {
     super()
 
-    this.code = 'EINV'
+    this.code = 'EVALIDATION'
     this.message = `Validation error ${error}`
     this.error = error
+    this.validationErrors = []
   }
 }
 

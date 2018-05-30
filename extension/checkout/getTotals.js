@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} GetTotalsInput
- * @property {ShippingMethod[]} shippingMethods
+ * @property {ShippingMethod} shippingMethod
  * @property {Object} checkout
  * @property {Object[]} totals
  */
@@ -13,16 +13,12 @@
 module.exports = async (context, input) => {
   const totals = input.totals
 
-  if (!input.shippingMethods.length || !input.checkout.shippingMethod) {
+  if (!input.shippingMethod) {
     // no shipping methods
     return {totals}
   }
 
-  const shippingMethod = input.shippingMethods.find(method => method.id === input.checkout.shippingMethod.id)
-  if (!shippingMethod) {
-    context.log.info(input, 'Could not find shipping method to calculate totals')
-    return {totals}
-  }
+  const shippingMethod = input.shippingMethod
 
   if (shippingMethod.amount === 0) {
     return {totals}

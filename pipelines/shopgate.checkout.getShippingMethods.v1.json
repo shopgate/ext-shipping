@@ -7,73 +7,101 @@
       {"key": "checkout", "id": "10"}
     ],
     "output": [
-      {"key": "methods", "id": "20"}
+      {"key": "shippingMethods", "id": "20"}
     ],
     "steps": [
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/getShippingMethods.js",
+        "path": "@shopgate/shipping/shipping/prepareShippingMethodList.js",
         "input": [],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ]
       },
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/mocked/dhl.js",
+        "path": "@shopgate/shipping/shipping/mockedMethods/dhl.js",
         "input": [
           {"key": "checkout", "id": "10"},
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ]
       },
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/mocked/hermes.js",
+        "path": "@shopgate/shipping/shipping/mockedMethods/hermes.js",
         "input": [
           {"key": "checkout", "id": "10"},
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ]
       },
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/mocked/ups.js",
+        "path": "@shopgate/shipping/shipping/mockedMethods/ups.js",
         "input": [
           {"key": "checkout", "id": "10"},
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ]
       },
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/preselectShippingMethod.js",
+        "path": "@shopgate/shipping/shipping/mockedRules/DE.js",
         "input": [
-          {"key": "methods", "id": "20"}
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
         ],
         "output": [
-          {"key": "methods", "id": "20"}
+          {"key": "shippingMethods", "id": "20"}
         ]
       },
       {
         "type": "extension",
         "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/rememberShippingMethod.js",
+        "path": "@shopgate/shipping/shipping/mockedRules/NL.js",
         "input": [
-          {"key": "checkout", "id": "10"}
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
         ],
-        "output": []
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/mockedRules/UK.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/setShippingMethodSelection.js",
+        "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
       }
     ]
   }
