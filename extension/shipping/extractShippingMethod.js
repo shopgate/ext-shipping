@@ -7,9 +7,9 @@ module.exports = async (context, input) => {
   let shippingMethod
 
   // the input might contain a selected shipping method, which takes priority, if it's valid
-  if (input.checkout.shippingMethodId) {
+  if (input.checkout.shippingMethod) {
     shippingMethod = input.shippingMethods.find(
-      method => method.id === input.checkout.shippingMethodId
+      method => method.id === input.checkout.shippingMethod.id
     )
   }
 

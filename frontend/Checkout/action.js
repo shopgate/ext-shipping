@@ -4,10 +4,10 @@ export default checkout => (dispatch) => {
   new PipelineRequest('shopgate.checkout.getShippingMethods')
     .setInput({ checkout })
     .dispatch()
-    .then(({ methods }) => {
+    .then(({ shippingMethods }) => {
       dispatch({
         type: 'SHIPPING_METHODS',
-        methods,
+        methods: shippingMethods,
       });
     });
 };

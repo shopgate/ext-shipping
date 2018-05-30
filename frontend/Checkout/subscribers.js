@@ -11,7 +11,7 @@ export default (subscribe) => {
       return;
     }
     setTimeout(() => {
-      const checkout = getState();
+      const { checkout } = getState().extensions['@shopgate/checkout/CheckoutReducers'];
       fetchShippingMethods(checkout)(dispatch);
     }, 500);
   });

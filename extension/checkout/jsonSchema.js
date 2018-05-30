@@ -4,18 +4,11 @@ const Joi = require('joi')
 const checkoutSchema = Joi.object().keys({
   items: Joi.array().min(1).items(
     Joi.object().keys({
-      id: Joi.string().required(),
-      name: Joi.string().required(),
-      type: Joi.string().valid(['product', 'coupon']).required(),
-      unitPrice: Joi.number().integer(), // -100 | 0 | 100
-      quantity: Joi.number().positive().integer().min(1) // 1 | 2 | ...
-    })),
+      id: Joi.string().required()
+    }).unknown(true)),
   shippingMethod: Joi.object().keys({
-    id: Joi.string().required(),
-    name: Joi.string().required(),
-    amount: Joi.number().integer(), // -100 | 0 | 100
-    taxAmount: Joi.number().positive().integer()
-  })
+    id: Joi.string().required()
+  }).unknown(true)
 }).requiredKeys([
   'items'
 ]).unknown(true) // other keys are allowed as well
