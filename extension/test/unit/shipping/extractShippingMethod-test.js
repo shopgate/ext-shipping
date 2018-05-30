@@ -53,7 +53,6 @@ describe('extractShippingMethod', () => {
   })
 
   it('Should not get any payment method, if the input does not contain a shippingMethodId in the checkout', async () => {
-    // no fronteend selection given, so it should take it from the last order
     const input = {
       checkout: {},
       shippingMethods: [
@@ -76,7 +75,6 @@ describe('extractShippingMethod', () => {
   })
 
   it('Should not return any shipping methods, if the requested shipping method is not in the list', async () => {
-    // select 1 and 2, but 2 should be prioritized over 1
     const input = {
       checkout: {
         shippingMethodId: mockedMethod3.id
@@ -88,37 +86,6 @@ describe('extractShippingMethod', () => {
     }
 
     const expectedOutput = {shippingMethod: undefined}
-
-    let output
-    try {
-      // noinspection JSCheckFunctionSignatures
-      output = await executeStep(context, input)
-    } catch (err) {
-      assert.ifError(err)
-    }
-
-    assert.deepEqual(output, expectedOutput)
-  })
-
-  it('Should not select any shipping if the selection is not available', async () => {
-    // set mocked shipping methods 1 and 2 to "selected"
-    const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
-    const input = {
-      checkout: {
-        shippingMethodId: mockedMethod2.id
-      },
-      // shipping methods 1 and 2 are not selectable
-      shippingMethods: [
-        mockedMethod3
-      ]
-    }
-
-    // mocked shipping methods 1 and 2 were selected but only not-selected method 3 is expected
-    const expectedOutput = {
-      shippingMethods: [
-        {...mockedMethod3, selected: false}
-      ]
-    }
 
     let output
     try {
