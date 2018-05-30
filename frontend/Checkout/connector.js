@@ -7,7 +7,6 @@ import { getMethods } from './selectors';
  */
 const mapStateToProps = state => ({
   methods: getMethods(state),
-  currency: 'USD',
 });
 
 /**

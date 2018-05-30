@@ -8,15 +8,14 @@ import Methods from './components/Methods';
  * @param {Object} props props
  * @return {*}
  */
-const Checkout = ({ selectMethod, currency, methods }) => (
+const Checkout = ({ selectMethod, methods }) => (
   <Fragment>
     <Title />
-    <Methods methods={methods} currency={currency} selectMethod={selectMethod} />
+    <Methods methods={methods} selectMethod={selectMethod} />
   </Fragment>
 );
 
 Checkout.propTypes = {
-  currency: PropTypes.string.isRequired,
   methods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   selectMethod: PropTypes.func.isRequired,
 };
