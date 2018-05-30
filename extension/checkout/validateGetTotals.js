@@ -1,6 +1,6 @@
 const Joi = require('joi')
-const ValidationError = require('./../errors/ValidationError')
-const ShippingError = require('./../errors/ShippingError')
+const ValidationError = require('./../common/Error/ValidationError')
+const ShippingError = require('./../common/Error/ShippingError')
 const {checkoutSchema} = require('./jsonSchema')
 
 /**
