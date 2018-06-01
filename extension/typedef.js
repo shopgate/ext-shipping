@@ -68,7 +68,9 @@
  * @typedef {Object} Checkout
  * @property {?Object[]} items
  * @property {?Object} shippingAddress
+ * @property {?string} shippingAddress.countryCode
  * @property {?Object} billingAddress
+ * @property {?string} billingAddress.countryCode
  * @property {ShippingMethod} shippingMethod
  * @property {?Object} paymentMethod
  */
