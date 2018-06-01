@@ -48,8 +48,8 @@
  * @property {string} id
  * @property {?string} name
  * @property {?string} description
- * @property {?number} amount - minor units
- * @property {?number} taxAmount - minor units
+ * @property {?number} amount
+ * @property {?number} taxAmount
  * @property {boolean|undefined} selected
  */
 
