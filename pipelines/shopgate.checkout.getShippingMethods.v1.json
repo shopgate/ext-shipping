@@ -11,13 +11,10 @@
     ],
     "steps": [
       {
-        "type": "extension",
-        "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/prepareShippingMethodList.js",
+        "type": "staticValue",
         "input": [],
-        "output": [
-          {"key": "shippingMethods", "id": "20"}
-        ]
+        "values": [{"key": "shippingMethods", "value": []}],
+        "output": [{"key": "shippingMethods", "id": "20"}]
       },
       {
         "type": "extension",

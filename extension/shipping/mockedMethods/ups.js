@@ -8,8 +8,8 @@ module.exports = async (context, input) => {
     id: 'ups',
     name: 'UPS next day delivery',
     description: 'Delivery of order before Saturday 17 May 2018',
-    amount: 100,
-    taxAmount: 19
+    amount: 7.3,
+    taxAmount: 1.5
   })
 
   return {shippingMethods: input.shippingMethods}

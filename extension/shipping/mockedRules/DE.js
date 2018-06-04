@@ -4,7 +4,7 @@
  * @returns {Promise<ShippingMethod[]>|ShippingMethod[]}
  */
 module.exports = async (context, input) => {
-  if (input.checkout.shippingAddress && input.checkout.shippingAddress.countryCode !== 'DE') {
+  if (!input.checkout.shippingAddress || input.checkout.shippingAddress.countryCode !== 'DE') {
     return {shippingMethods: input.shippingMethods}
   }
 

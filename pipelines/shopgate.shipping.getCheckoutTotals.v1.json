@@ -28,7 +28,7 @@
           {"key": "checkout", "id": "10"}
         ],
         "output": [
-          {"key": "shippingMethod", "id": "20"}
+          {"key": "shippingMethod", "id": "20", "optional": true}
         ]
       },
       {
@@ -36,7 +36,7 @@
         "id": "@shopgate/shipping",
         "path": "@shopgate/shipping/checkout/getTotals.js",
         "input": [
-          {"key": "shippingMethod", "id": "20"},
+          {"key": "shippingMethod", "id": "20", "optional": true},
           {"key": "checkout", "id": "10"},
           {"key": "totals", "id": "11"}
         ],

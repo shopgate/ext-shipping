@@ -2,5 +2,22 @@
   "version": "1.0.0",
   "id": "@shopgate/shipping",
   "configuration": {},
-  "components": []
+  "components": [
+    {
+      "type": "subscribers",
+      "id": "CheckoutSubscribers",
+      "path": "frontend/Checkout/subscribers.js"
+    },
+    {
+      "type": "portals",
+      "id": "CheckoutShippingMethod",
+      "path": "frontend/Checkout/index.jsx",
+      "target": "checkout.shipping_method"
+    },
+    {
+      "id": "CheckoutReducers",
+      "path": "frontend/Checkout/reducers.js",
+      "type": "reducers"
+    }
+  ]
 }

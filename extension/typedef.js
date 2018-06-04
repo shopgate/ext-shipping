@@ -46,10 +46,11 @@
 /**
  * @typedef {Object} ShippingMethod
  * @property {string} id
- * @property {string} name
- * @property {string} description
- * @property {number} amount - minor units
- * @property {?boolean} selected
+ * @property {?string} name
+ * @property {?string} description
+ * @property {?number} amount
+ * @property {?number} taxAmount
+ * @property {boolean|undefined} selected
  */
 
 /**
@@ -64,11 +65,12 @@
  */
 
 /**
- * typedef {Object} Checkout
+ * @typedef {Object} Checkout
  * @property {?Object[]} items
  * @property {?Object} shippingAddress
- * @property {string} shippingAddress.
+ * @property {?string} shippingAddress.countryCode
  * @property {?Object} billingAddress
- * @property {?string} shippingMethodId
- * @property {?string} paymentMethodId
+ * @property {?string} billingAddress.countryCode
+ * @property {ShippingMethod} shippingMethod
+ * @property {?Object} paymentMethod
  */
