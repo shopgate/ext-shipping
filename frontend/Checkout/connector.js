@@ -3,14 +3,13 @@ import { getMethods } from './selectors';
 
 /**
  * @param {Object} state state
- * @return {{cartItems: *, currency: *, subTotal: *}}
+ * @return {{methods: *}}
  */
 const mapStateToProps = state => ({
   methods: getMethods(state),
 });
 
 /**
- *
  * @param {function} dispatch redux
  * @return {{selectMethod: (function(*): *)}}
  */

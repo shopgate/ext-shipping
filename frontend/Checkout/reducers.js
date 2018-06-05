@@ -6,21 +6,16 @@ export default (state = {}, action) => {
         methods: action.methods,
       };
 
-    case 'SELECT_SHIPPING_METHOD': {
-      const methods = state.methods.map(method => ({
-        ...method,
-        selected: method.id === action.method.id,
-      }));
-
+    case 'SELECT_SHIPPING_METHOD':
       return {
         ...state,
-        methods,
+        selectedMethod: action.method,
       };
-    }
 
     default:
       return {
         methods: [],
+        selectedMethod: null,
         ...state,
       };
   }
