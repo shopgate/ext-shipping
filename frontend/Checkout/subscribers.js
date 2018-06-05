@@ -35,10 +35,6 @@ export default (subscribe) => {
 
   subscribe(selectShippingMethod$, ({ dispatch, getState, action }) => {
     const selectedMethod = getSelectedMethod(getState());
-    if (selectedMethod && selectedMethod.id === action.method.id) {
-      // Already selected
-      return;
-    }
     dispatch({
       type: 'CHECKOUT_DATA',
       id: 'shippingMethod',
