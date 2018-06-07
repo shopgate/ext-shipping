@@ -1,0 +1,97 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.checkout.processShipping.v1",
+    "public": false,
+    "input": [
+      {"key": "checkout", "id": "1"}
+    ],
+    "output": [
+      {"key": "checkout", "id": "100"}
+    ],
+    "steps": [
+      {
+        "_comment": "Copy checkout object for modification.",
+
+        "type": "extension",
+        "id": "@shopgate/util",
+        "path": "@shopgate/util/util/merge.js",
+        "input": [
+          {"key": "first", "id": "1"}
+        ],
+        "output": [
+          {"key": "data", "id": "100"}
+        ]
+      },
+
+      {
+        "_comment": "Request the currently selected shipping method from the incoming checkout.",
+
+        "type": "pipeline",
+        "id": "shopgate.checkout.getShippingMethod.v1",
+        "input": [
+          {"key": "checkout", "id": "100"}
+        ],
+        "output": [
+          {"key": "shippingMethod", "id": "121", "optional": true}
+        ]
+      },
+      {
+        "_comment": "Defines a list of properties to keep from the shipping method, because not all properties are used to create the order.",
+
+        "type": "staticValue",
+        "input": [],
+        "values": [{"key": "shippingMethodPropertyFilter", "value": [
+          "id",
+          "name",
+          "amount",
+          "taxAmount"
+        ]}],
+        "output": [
+          {"key": "shippingMethodPropertyFilter", "id": "503"}
+        ]
+      },
+      {
+        "_comment": "Filters out all non white-listed properties from the shipping method.",
+
+        "type": "extension",
+        "id": "@shopgate/util",
+        "path": "@shopgate/util/util/filter.js",
+        "input": [
+          {"key": "properties", "id": "503"},
+          {"key": "hydratedObject", "id": "121", "optional": true}
+        ],
+        "output": [
+          {"key": "filteredObject", "id": "122", "optional": true}
+        ]
+      },
+      {
+        "_comment": "Pack shipping method data into a property named 'shippingMethod'.",
+
+        "type": "extension",
+        "id": "@shopgate/util",
+        "path": "@shopgate/util/util/pack.js",
+        "input": [
+          {"key": "shippingMethod", "id": "122", "optional": true}
+        ],
+        "output": [
+          {"key": "data", "id": "120", "optional": true}
+        ]
+      },
+      {
+        "_comment": "Merge the currently selected shipping method into the checkout object.",
+
+        "type": "extension",
+        "id": "@shopgate/util",
+        "path": "@shopgate/util/util/merge.js",
+        "input": [
+          {"key": "first", "id": "100"},
+          {"key": "second", "id": "120", "optional": true}
+        ],
+        "output": [
+          {"key": "data", "id": "100"}
+        ]
+      }
+    ]
+  }
+}
