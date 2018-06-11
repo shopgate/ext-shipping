@@ -1,10 +1,14 @@
 import React from 'react';
+import I18n from '@shopgate/pwa-common/components/I18n';
+import * as style from './style';
 
 /**
  * @return {*}
  */
 const Title = () => (
-  <h3>Shipping options</h3>
+  <div className={style.title}>
+    <I18n.Text string="checkout.shipping.title" />
+  </div>
 );
 
 export default Title;
