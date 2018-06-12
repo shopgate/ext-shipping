@@ -1,18 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import connect from './connector';
 import Title from './components/Title';
 import Methods from './components/Methods';
+import * as style from './style';
 
 /**
  * @param {Object} props props
  * @return {*}
  */
 const Checkout = ({ selectMethod, methods }) => (
-  <Fragment>
+  <div className={style.container}>
     <Title />
     <Methods methods={methods} selectMethod={selectMethod} />
-  </Fragment>
+  </div>
 );
 
 Checkout.propTypes = {
