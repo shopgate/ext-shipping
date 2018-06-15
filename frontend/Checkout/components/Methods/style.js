@@ -4,9 +4,9 @@ import { themeConfig } from '@shopgate/pwa-common/helpers/config';
 const { variables, colors } = themeConfig;
 
 export const method = css({
-  padding: `${variables.gap.small}px ${variables.gap.big}px`,
-  marginBottom: '1px',
+  padding: variables.gap.big,
   background: colors.light,
+  borderBottom: `${variables.gap.xsmall / 2}px solid ${colors.background}`,
 }).toString();
 
 export const description = css({
@@ -15,12 +15,11 @@ export const description = css({
 }).toString();
 
 export const icon = css({
-  textAlign: 'right',
   color: colors.primary,
 }).toString();
 
 export const name = css({
-  fontSize: '14px',
+  fontSize: '0.875rem',
   fontWeight: 500,
 }).toString();
 
