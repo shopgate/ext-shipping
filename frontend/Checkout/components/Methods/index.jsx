@@ -18,10 +18,10 @@ const Methods = ({ selectMethod, methods }) => (
         {
           methods.map(method => (
             <div
+              aria-hidden
               className={style.method}
               key={`shipping_${method.id}`}
               onClick={() => selectMethod(method)}
-              role="button"
             >
               <Grid>
                 <Grid.Item grow={1} className={style.name}>
