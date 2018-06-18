@@ -29,11 +29,13 @@ describe('extractShippingMethod', () => {
   it('Should fetch the correct shipping method regardless, of what is selected', async () => {
     const input = {
       checkout: {
-        shippingMethodId: mockedMethod2.id
+        shippingMethod: {
+          id: mockedMethod2.id
+        }
       },
       shippingMethods: [
-        mockedMethod1,
-        mockedMethod2
+        {...mockedMethod1},
+        {...mockedMethod2}
       ]
     }
 

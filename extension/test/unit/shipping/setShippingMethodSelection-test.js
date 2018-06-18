@@ -87,11 +87,13 @@ describe('setShippingMethodSelection', () => {
     const context = createContext('user', () => mockedMethod1.id, () => {}, () => {}, 1)
     const input = {
       checkout: {
-        shippingMethodId: mockedMethod2.id
+        shippingMethod: {
+          id: mockedMethod2.id
+        }
       },
       shippingMethods: [
-        mockedMethod1,
-        mockedMethod2
+        {...mockedMethod1},
+        {...mockedMethod2}
       ]
     }
 

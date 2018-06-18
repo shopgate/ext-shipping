@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getMethods } from './selectors';
+import { getMethods, getSelectedMethod } from './selectors';
 
 /**
  * @param {Object} state state
@@ -7,6 +7,7 @@ import { getMethods } from './selectors';
  */
 const mapStateToProps = state => ({
   methods: getMethods(state),
+  selectedMethod: getSelectedMethod(state) || {},
 });
 
 /**
@@ -14,10 +15,12 @@ const mapStateToProps = state => ({
  * @return {{selectMethod: (function(*): *)}}
  */
 const mapDispatchToProps = dispatch => ({
-  selectMethod: method => dispatch({
-    type: 'SELECT_SHIPPING_METHOD',
-    method,
-  }),
+  selectMethod: (method) => {
+    dispatch({
+      type: 'SELECT_SHIPPING_METHOD',
+      method,
+    });
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);
