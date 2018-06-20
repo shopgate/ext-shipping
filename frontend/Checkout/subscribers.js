@@ -57,12 +57,12 @@ export default (subscribe) => {
     }
 
     // Check if checkout method still available
-    if (checkout.paymentMethod) {
-      const stillExists = methods.find(m => m.id === checkout.paymentMethod.id);
+    if (checkout.shippingMethod) {
+      const stillExists = methods.find(m => m.id === checkout.shippingMethod.id);
       if (!stillExists) {
         dispatch({
           type: 'CHECKOUT_DATA',
-          id: 'paymentMethod',
+          id: 'shippingMethod',
           data: null,
         });
       }
