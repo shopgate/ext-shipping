@@ -5,6 +5,12 @@ export default (state = {}, action) => {
         methods: action.methods,
       };
 
+    case 'CHECKOUT_SUCCESS':
+      return {
+        ...state,
+        methods: null,
+      };
+
     default:
       return {
         methods: null,

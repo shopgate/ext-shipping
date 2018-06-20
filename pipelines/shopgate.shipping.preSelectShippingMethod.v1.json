@@ -1,0 +1,44 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.shipping.preSelectShippingMethod.v1",
+    "public": false,
+    "input": [
+      {"key": "shippingMethods", "id": "10"}
+    ],
+    "output": [
+      {"key": "shippingMethods", "id": "10"}
+    ],
+    "steps": [
+      {
+        "type": "staticValue",
+        "input": [],
+        "values": [{"key": "maxOrders", "value": 1}],
+        "output": [{"key": "maxOrders", "id": "20"}]
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.user.getOrders.v1",
+        "trusted": true,
+        "input": [
+          {"key": "limit", "id": "20"}
+        ],
+        "output": [
+          {"key": "orders", "id": "21"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/rules/preSelectByLastOrder.js",
+        "input": [
+          {"key": "shippingMethods", "id": "10"},
+          {"key": "orders", "id": "21"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "10"}
+        ]
+      }
+    ]
+  }
+}

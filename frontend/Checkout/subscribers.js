@@ -2,7 +2,7 @@ import { main$ } from '@shopgate/pwa-common/streams/main';
 import { CART_PATH } from '@shopgate/pwa-common-commerce/cart/constants';
 import { routeDidEnter } from '@shopgate/pwa-common/streams/history';
 import fetchShippingMethods from './action';
-import { getMethods, getSelectedMethod } from './selectors';
+import { getMethods } from './selectors';
 
 export default (subscribe) => {
   const cartRouteDidEnter$ = routeDidEnter(CART_PATH);
@@ -31,11 +31,12 @@ export default (subscribe) => {
    * After receiving shipping methods,
    * notify subscribers that we have default selection
    */
-  subscribe(shippingMethods$, ({ dispatch, getState, action }) => {
-    const selectedMethod = getSelectedMethod(getState());
-    if (selectedMethod) {
+  subscribe(shippingMethods$, ({ dispatch, action }) => {
+    if (!Object.keys(action.checkout).length || action.checkout.shippingMethod) {
+      // Prefetch before checkout or already selected for this checkout
       return;
     }
+
     // PreSelect first default method
     const method = action.methods.find(shipMethod => shipMethod.selected);
     if (method) {

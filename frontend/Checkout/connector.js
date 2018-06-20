@@ -6,7 +6,7 @@ import { getMethods, getSelectedMethod } from './selectors';
  * @return {{methods: *}}
  */
 const mapStateToProps = state => ({
-  methods: getMethods(state),
+  methods: getMethods(state) || [],
   selectedMethod: getSelectedMethod(state) || {},
 });
 
