@@ -16,3 +16,9 @@ export const getSelectedMethod = (state) => {
   }
   return methods.find(method => method.selected);
 };
+
+/**
+ * @param {Object} state redux
+ * @return {*}
+ */
+export const getContext = state => state.extensions[key].context;

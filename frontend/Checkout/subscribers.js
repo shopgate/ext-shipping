@@ -2,7 +2,7 @@ import { main$ } from '@shopgate/pwa-common/streams/main';
 import { CART_PATH } from '@shopgate/pwa-common-commerce/cart/constants';
 import { routeDidEnter } from '@shopgate/pwa-common/streams/history';
 import fetchShippingMethods from './action';
-import { getMethods } from './selectors';
+import { getMethods, getContext } from './selectors';
 
 export default (subscribe) => {
   const cartRouteDidEnter$ = routeDidEnter(CART_PATH);
@@ -23,8 +23,25 @@ export default (subscribe) => {
   /**
    * Fetch shipping methods when checkout state is changed
    */
-  subscribe(checkoutState$, ({ dispatch, action }) => {
-    fetchShippingMethods(action.checkout)(dispatch);
+  subscribe(checkoutState$, ({ dispatch, getState, action }) => {
+    const { shippingAddress, paymentMethod } = getContext(getState());
+
+    let shouldRefresh = false;
+    if (action.checkout.paymentMethod) {
+      if (!paymentMethod || paymentMethod.id !== action.checkout.paymentMethod.id) {
+        shouldRefresh = true;
+      }
+    }
+
+    if (action.checkout.shippingAddress) {
+      if (!shippingAddress || shippingAddress.id !== action.checkout.shippingAddress.id) {
+        shouldRefresh = true;
+      }
+    }
+
+    if (shouldRefresh) {
+      fetchShippingMethods(action.checkout)(dispatch);
+    }
   });
 
   /**
@@ -32,13 +49,28 @@ export default (subscribe) => {
    * notify subscribers that we have default selection
    */
   subscribe(shippingMethods$, ({ dispatch, action }) => {
-    if (!Object.keys(action.checkout).length || action.checkout.shippingMethod) {
-      // Prefetch before checkout or already selected for this checkout
+    const { methods, checkout } = action;
+
+    if (!Object.keys(action.checkout).length) {
+      // Prefetch before checkout
+      return;
+    }
+
+    // Check if checkout method still available
+    if (checkout.paymentMethod) {
+      const stillExists = methods.find(m => m.id === checkout.paymentMethod.id);
+      if (!stillExists) {
+        dispatch({
+          type: 'CHECKOUT_DATA',
+          id: 'paymentMethod',
+          data: null,
+        });
+      }
       return;
     }
 
     // PreSelect first default method
-    const method = action.methods.find(shipMethod => shipMethod.selected);
+    const method = methods.find(m => m.selected);
     if (method) {
       dispatch({
         type: 'SELECT_SHIPPING_METHOD',
