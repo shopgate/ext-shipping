@@ -2,10 +2,11 @@ import { main$ } from '@shopgate/pwa-common/streams/main';
 import { CART_PATH } from '@shopgate/pwa-common-commerce/cart/constants';
 import { routeDidEnter } from '@shopgate/pwa-common/streams/history';
 import fetchShippingMethods from './action';
-import { getMethods, getContext } from './selectors';
+import { getMethods, getContext, getSelectedMethod } from './selectors';
 
 export default (subscribe) => {
   const cartRouteDidEnter$ = routeDidEnter(CART_PATH);
+  const checkoutEnter$ = main$.filter(({ action }) => action.type === 'CHECKOUT_ENTER');
   const checkoutState$ = main$.filter(({ action }) => action.type === 'CHECKOUT_STATE');
   const shippingMethods$ = main$.filter(({ action }) => action.type === 'SHIPPING_METHODS');
   const selectShippingMethod$ = main$.filter(({ action }) => action.type === 'SELECT_SHIPPING_METHOD');
@@ -17,6 +18,24 @@ export default (subscribe) => {
     const methods = getMethods(getState());
     if (!methods) {
       fetchShippingMethods()(dispatch);
+    }
+  });
+
+  /**
+   * PreSelect shipping method on checkout enter.
+   */
+  subscribe(checkoutEnter$, ({ dispatch, getState, action }) => {
+    if (action.checkout.shippingMethod) {
+      // Already exists
+      return;
+    }
+
+    const method = getSelectedMethod(getState());
+    if (method) {
+      dispatch({
+        type: 'SELECT_SHIPPING_METHOD',
+        method,
+      });
     }
   });
 
