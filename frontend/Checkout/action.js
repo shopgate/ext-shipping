@@ -10,6 +10,7 @@ export default (checkout = {}) => (dispatch) => {
       dispatch({
         type: 'SHIPPING_METHODS',
         methods: shippingMethods,
+        checkout,
       });
     });
 };

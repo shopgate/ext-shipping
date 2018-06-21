@@ -40,7 +40,7 @@ class Checkout extends Component {
   handleMethodSelection = (method) => {
     this.setState({ method }, () => {
       clearTimeout(this.selectMethodTimeout);
-      this.selectMethodTimeout = setTimeout(this.submitMethod, 1000);
+      this.selectMethodTimeout = setTimeout(this.submitMethod, 700);
     });
   }
 

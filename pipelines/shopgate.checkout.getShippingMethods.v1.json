@@ -89,11 +89,9 @@
         ]
       },
       {
-        "type": "extension",
-        "id": "@shopgate/shipping",
-        "path": "@shopgate/shipping/shipping/setShippingMethodSelection.js",
+        "type": "pipeline",
+        "id": "shopgate.shipping.preSelectShippingMethod.v1",
         "input": [
-          {"key": "checkout", "id": "10"},
           {"key": "shippingMethods", "id": "20"}
         ],
         "output": [
