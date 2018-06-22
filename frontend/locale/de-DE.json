@@ -1,7 +1,9 @@
 {
   "checkout": {
     "shipping": {
-      "title": "Versandoptionen"
+      "methods": {
+        "title": "Versandoptionen"
+      }
     }
  }
 }
