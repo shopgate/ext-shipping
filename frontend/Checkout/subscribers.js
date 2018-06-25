@@ -98,13 +98,19 @@ export default (subscribe) => {
     }
   });
 
-  subscribe(selectShippingMethod$, ({ dispatch, action }) => {
+  let selectMethodTimeout = null;
+  const selectShippingMethodDelayed = (dispatch, method) => {
     dispatch({
       type: 'CHECKOUT_DATA',
       id: 'shippingMethod',
       data: {
-        id: action.method.id,
+        id: method.id,
       },
     });
+  };
+
+  subscribe(selectShippingMethod$, ({ dispatch, action }) => {
+    clearTimeout(selectMethodTimeout);
+    selectMethodTimeout = setTimeout(selectShippingMethodDelayed, 700, dispatch, action.method);
   });
 };

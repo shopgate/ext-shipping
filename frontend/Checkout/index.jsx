@@ -5,7 +5,7 @@ import Title from './components/Title';
 import Methods from './components/Methods';
 
 /**
- * Select address component
+ * Select method component
  */
 class Checkout extends Component {
   static propTypes = {
@@ -19,29 +19,14 @@ class Checkout extends Component {
    */
   constructor(props) {
     super(props);
-
-    this.state = {
-      method: {
-        id: props.selectedMethod.id,
-      },
-    };
-
-    this.selectMethodTimeout = null;
-  }
-
-  submitMethod = () => {
-    this.props.selectMethod(this.state.method);
   }
 
   /**
-   * Update state to ReRender children, then dispatch action about selection
-   * @param {Object} method method
+   * Update state to ReRender children, then dispatch action
+   * @param {Object} method
    */
   handleMethodSelection = (method) => {
-    this.setState({ method }, () => {
-      clearTimeout(this.selectMethodTimeout);
-      this.selectMethodTimeout = setTimeout(this.submitMethod, 700);
-    });
+    this.props.selectMethod(method);
   }
 
   /**
@@ -52,7 +37,7 @@ class Checkout extends Component {
 
     const methodsWitSelection = methods.map(method => ({
       ...method,
-      selected: this.state.method.id === method.id,
+      selected: this.props.selectedMethod.id === method.id,
     }));
 
     return (
