@@ -4,8 +4,13 @@
  * @returns {Promise<>}
  */
 module.exports = async (context, input) => {
-  let lastMethodId
+  // Keep current selection if valid
+  const current = input.shippingMethods.find(m => input.checkout.shippingMethod && m.id === input.checkout.shippingMethod.id);
+  if (current) {
+    return {shippingMethods: input.shippingMethods}
+  }
 
+  let lastMethodId
   if (Array.isArray(input.orders) && input.orders.length) {
     lastMethodId = input.orders[0].shippingMethod.id
   }
