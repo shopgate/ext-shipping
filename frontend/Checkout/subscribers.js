@@ -99,7 +99,10 @@ export default (subscribe) => {
   });
 
   let selectMethodTimeout = null;
-  const selectShippingMethodDelayed = (dispatch, method) => {
+  /**
+   * @param {Object} args args
+   */
+  const selectShippingMethodDelayed = ({ dispatch, method }) => {
     dispatch({
       type: 'CHECKOUT_DATA',
       id: 'shippingMethod',
@@ -111,6 +114,13 @@ export default (subscribe) => {
 
   subscribe(selectShippingMethod$, ({ dispatch, action }) => {
     clearTimeout(selectMethodTimeout);
-    selectMethodTimeout = setTimeout(selectShippingMethodDelayed, 700, dispatch, action.method);
+    selectMethodTimeout = setTimeout(
+      selectShippingMethodDelayed,
+      700,
+      {
+        dispatch,
+        method: action.method,
+      }
+    );
   });
 };

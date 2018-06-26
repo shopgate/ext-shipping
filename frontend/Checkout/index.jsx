@@ -1,52 +1,30 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import connect from './connector';
 import Title from './components/Title';
 import Methods from './components/Methods';
 
 /**
- * Select method component
+ * @param {Object} props props
+ * @return {*}
  */
-class Checkout extends Component {
-  static propTypes = {
-    methods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-    selectedMethod: PropTypes.shape().isRequired,
-    selectMethod: PropTypes.func.isRequired,
-  }
-
-  /**
-   * @param {Object} props props
-   */
-  constructor(props) {
-    super(props);
-  }
-
-  /**
-   * Update state to ReRender children, then dispatch action
-   * @param {Object} method
-   */
-  handleMethodSelection = (method) => {
-    this.props.selectMethod(method);
-  }
-
-  /**
-   * @return {*}
-   */
-  render() {
-    const { methods } = this.props;
-
-    const methodsWitSelection = methods.map(method => ({
+const Checkout = ({ methods, selectedMethod, selectMethod }) => (
+  <Fragment>
+    <Title />
+    <Methods
+      methods={methods.map(method => ({
       ...method,
-      selected: this.props.selectedMethod.id === method.id,
-    }));
+      selected: selectedMethod.id === method.id,
+    }))}
+      selectMethod={method => selectMethod(method)}
+    />
+  </Fragment>
+);
 
-    return (
-      <Fragment>
-        <Title />
-        <Methods methods={methodsWitSelection} selectMethod={this.handleMethodSelection} />
-      </Fragment>
-    );
-  }
-}
+Checkout.propTypes = {
+  methods: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  selectedMethod: PropTypes.shape().isRequired,
+  selectMethod: PropTypes.func.isRequired,
+};
 
 export default connect(Checkout);

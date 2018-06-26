@@ -1,6 +1,6 @@
 /**
  * @param {SDKContext} context
- * @param {PaymentMethodInput} input
+ * @param {ShippingMethodInput} input
  * @returns {Promise<{shippingMethods: Object[]}>}
  */
 module.exports = async (context, input) => {

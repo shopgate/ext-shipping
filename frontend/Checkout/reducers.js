@@ -12,7 +12,10 @@ export default (state = {}, action) => {
     case 'SELECT_SHIPPING_METHOD':
       return {
         ...state,
-        methods: state.methods.map(m => ({...m, selected: m.id === action.method.id})),
+        methods: state.methods.map(m => ({
+          ...m,
+          selected: m.id === action.method.id,
+        })),
       };
 
     case 'CHECKOUT_SUCCESS':
