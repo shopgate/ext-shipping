@@ -89,9 +89,22 @@
         ]
       },
       {
-        "type": "pipeline",
-        "id": "shopgate.shipping.preSelectShippingMethod.v1",
+        "type": "extension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/rules/preSelectByCurrentSelection.js",
         "input": [
+          {"key": "checkout", "id": "10"},
+          {"key": "shippingMethods", "id": "20"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "20"}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.shipping.preSelectByLastOrder.v1",
+        "input": [
+          {"key": "checkout", "id": "10"},
           {"key": "shippingMethods", "id": "20"}
         ],
         "output": [

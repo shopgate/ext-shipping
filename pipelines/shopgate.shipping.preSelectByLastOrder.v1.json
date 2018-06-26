@@ -1,9 +1,10 @@
 {
   "version": "1",
   "pipeline": {
-    "id": "shopgate.shipping.preSelectShippingMethod.v1",
+    "id": "shopgate.shipping.preSelectByLastOrder.v1",
     "public": false,
     "input": [
+      {"key": "checkout", "id": "9"},
       {"key": "shippingMethods", "id": "10"}
     ],
     "output": [
@@ -32,6 +33,7 @@
         "id": "@shopgate/shipping",
         "path": "@shopgate/shipping/shipping/rules/preSelectByLastOrder.js",
         "input": [
+          {"key": "checkout", "id": "9"},
           {"key": "shippingMethods", "id": "10"},
           {"key": "orders", "id": "21"}
         ],

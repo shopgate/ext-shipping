@@ -54,7 +54,7 @@ describe('extractShippingMethod', () => {
     assert.deepEqual(output, expectedOutput)
   })
 
-  it('Should not get any payment method, if the input does not contain a shippingMethodId in the checkout', async () => {
+  it('Should not get any shipping method, if the input does not contain a shippingMethodId in the checkout', async () => {
     const input = {
       checkout: {},
       shippingMethods: [
