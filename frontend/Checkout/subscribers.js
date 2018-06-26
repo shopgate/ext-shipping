@@ -75,21 +75,26 @@ export default (subscribe) => {
       return;
     }
 
+    const method = methods.find(shipMethod => shipMethod.selected);
+
     // Check if checkout method still available
     if (checkout.shippingMethod) {
       const stillExists = methods.find(m => m.id === checkout.shippingMethod.id);
       if (!stillExists) {
+        let data = { data: null };
+        if (method) {
+          data = method;
+        }
         dispatch({
           type: 'CHECKOUT_DATA',
           id: 'shippingMethod',
-          data: null,
+          data,
         });
       }
       return;
     }
 
     // PreSelect first default method
-    const method = methods.find(m => m.selected);
     if (method) {
       dispatch({
         type: 'SELECT_SHIPPING_METHOD',
