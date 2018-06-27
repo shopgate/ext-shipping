@@ -11,7 +11,7 @@ module.exports = async (context, input) => {
   }
 
   let lastMethodId
-  if (Array.isArray(input.orders) && input.orders.length) {
+  if (Array.isArray(input.orders) && input.orders.length && input.orders[0].shippingMethod) {
     lastMethodId = input.orders[0].shippingMethod.id
   }
 
