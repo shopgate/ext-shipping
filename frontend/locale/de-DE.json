@@ -4,6 +4,9 @@
       "methods": {
         "title": "Versandoptionen"
       }
+    },
+    "totals": {
+      "shipping": "Versand"
     }
  }
 }
