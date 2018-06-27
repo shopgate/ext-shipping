@@ -26,7 +26,6 @@ module.exports = async (context, input) => {
 
   totals.push({
     id: 'shipping',
-    label: 'Shipping',
     amount: shippingMethod.amount
   })
 
