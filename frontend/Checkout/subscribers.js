@@ -81,7 +81,7 @@ export default (subscribe) => {
     if (checkout.shippingMethod) {
       const stillExists = methods.find(m => m.id === checkout.shippingMethod.id);
       if (!stillExists) {
-        let data = { data: null };
+        let data = null;
         if (method) {
           data = method;
         }
