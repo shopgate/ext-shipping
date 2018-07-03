@@ -40,6 +40,17 @@
         "output": [
           {"key": "shippingMethods", "id": "10"}
         ]
+      },
+      {
+        "type": "errorCatchExtension",
+        "id": "@shopgate/shipping",
+        "path": "@shopgate/shipping/shipping/rules/preSelectByLastOrderError.js",
+        "input": [
+          {"key": "shippingMethods", "id": "10"}
+        ],
+        "output": [
+          {"key": "shippingMethods", "id": "10"}
+        ]
       }
     ]
   }
