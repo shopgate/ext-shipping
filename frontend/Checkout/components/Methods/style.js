@@ -12,6 +12,7 @@ export const method = css({
 export const description = css({
   color: colors.shade3,
   fontSize: '14px',
+  paddingRight: '36px',
 }).toString();
 
 export const icon = css({
