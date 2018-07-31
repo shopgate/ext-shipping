@@ -25,14 +25,16 @@ const Methods = ({ selectMethod, methods }) => (
             >
               <Grid>
                 <Grid.Item grow={1} className={style.name}>
-                  {method.amount !== 0 &&
-                    <I18n.Price
-                      price={method.amount}
-                      currency={checkout.currency}
-                      className={style.price}
-                    />
-                  }
-                  {method.name}
+                  <div data-test-id={method.name}>
+                    {method.amount !== 0 &&
+                      <I18n.Price
+                        price={method.amount}
+                        currency={checkout.currency}
+                        className={style.price}
+                      />
+                    }
+                    {method.name}
+                  </div>
                 </Grid.Item>
                 <Grid.Item grow={0} className={style.icon}>
                   {method.selected && <RadioCheckedIcon size={28} />}

@@ -6,7 +6,7 @@ import * as style from './style';
  * @return {*}
  */
 const Title = () => (
-  <div className={style.title}>
+  <div className={style.title} data-test-id="ShippingMethodsTitle">
     <I18n.Text string="checkout.shipping.methods.title" />
   </div>
 );
